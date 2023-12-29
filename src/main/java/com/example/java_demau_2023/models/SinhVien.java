@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class SinhVien {
     @Id
     @Column(name = "SoCMND")
-    private int SoCMND;
+    private Integer SoCMND;
     private String HoTen;
     private String Email;
     private String SoDT;

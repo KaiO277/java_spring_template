@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping(path = "sinhvien")
 public class SinhVienController {
@@ -40,6 +42,25 @@ public class SinhVienController {
         return "insertTN";
     }
 
+    @RequestMapping(value = "/updateTN/{SoCMND}", method = RequestMethod.GET)
+    public String updateTN(ModelMap modelMap, @PathVariable Integer SoCMND){
+        Optional<TotNghiep> totNghiepOptional = totNghiepRepositories.findById(SoCMND);
+        Optional<SinhVien> sinhVienOptional = sinhVienRepositories.findById(SoCMND);
+        TotNghiep totNghiep = totNghiepOptional.get();
+        SinhVien sinhVien = sinhVienOptional.get();
+        SinhVienTN sinhVienTN = new SinhVienTN(totNghiep.getSoCMND(),totNghiep.getMaTruong(), totNghiep.getMaNganh(), totNghiep.getHeTN(), totNghiep.getNgayTN(), totNghiep.getLoaiTN(),sinhVien.getHoTen(), sinhVien.getEmail(), sinhVien.getSoDT(), sinhVien.getDiaChi());
+        modelMap.addAttribute("dto", sinhVienTN);
+        return "updateTN";
+    }
+
+    @RequestMapping(value = "/deleteTN/{SoCMND}", method = RequestMethod.POST)
+    public String deleteTN(ModelMap modelMap, @PathVariable Integer SoCMND) {
+        System.out.println("haha");
+        System.out.println(SoCMND);
+        totNghiepRepositories.deleteById(SoCMND);
+        sinhVienRepositories.deleteById(SoCMND);
+        return "redirect:/sinhvien";
+    }
 
     @RequestMapping(value = "/insertTN", method = RequestMethod.POST)
     public String insertTN(ModelMap modelMap,

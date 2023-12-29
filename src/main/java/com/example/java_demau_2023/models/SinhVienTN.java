@@ -2,7 +2,7 @@ package com.example.java_demau_2023.models;
 
 
 public class SinhVienTN {
-    private int SoCMND;
+    private Integer SoCMND;
     private int MaTruong;
     private int MaNganh;
     private String HeTN;

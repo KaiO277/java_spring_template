@@ -31,7 +31,10 @@
                   <td>${sinhvien.getSoDT()}</td>
                   <td>${sinhvien.getDiaChi()}</td>
                   <td>
-
+                        <form action="/sinhvien/deleteTN/${sinhvien.getSoCMND()}"  method="post">
+                          <button type="submit" class="btn badge-danger">Remove</button>
+                        </form>
+                      <a href="/sinhvien/updateTN/${sinhvien.getSoCMND()}">Update</a>
                   </td>
               </tr>
             </c:forEach>

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class TotNghiep {
     @Id
     @Column(name = "SoCMND")
-    private int SoCMND;
+    private Integer SoCMND;
 
     private int MaTruong;
 

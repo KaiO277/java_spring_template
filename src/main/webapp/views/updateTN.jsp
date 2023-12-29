@@ -14,7 +14,7 @@
     <div class="form-group">
 
         <form:form method="POST"
-                   action="/sinhvien/insertTN"
+                   action="/sinhvien/updateTN/${dto.getSoCMND()}"
                    modelAttribute="dto">
 
             <form:select path="MaTruong">
@@ -36,6 +36,7 @@
             <form:input type="text"
                         placeholder="Enter ID"
                         class="form-control"
+                        value="${dto.getSoCMND()}"
                         path="SoCMND"
             /> <br>
 
