@@ -1,10 +1,9 @@
 package com.example.java_demau_2023.controllers;
 
-import com.example.java_demau_2023.models.Nganh;
-import com.example.java_demau_2023.models.SinhVien;
-import com.example.java_demau_2023.models.Truong;
+import com.example.java_demau_2023.models.*;
 import com.example.java_demau_2023.repositories.NganhRepositories;
 import com.example.java_demau_2023.repositories.SinhVienRepositories;
+import com.example.java_demau_2023.repositories.TotNghiepRepositories;
 import com.example.java_demau_2023.repositories.TruongRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,8 @@ public class SinhVienController {
     private TruongRepositories truongRepositories;
     @Autowired
     private NganhRepositories nganhRepositories;
-
+    @Autowired
+    private TotNghiepRepositories totNghiepRepositories;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(ModelMap modelMap){
@@ -32,6 +32,38 @@ public class SinhVienController {
         return "sinhvien";
     }
 
+    @RequestMapping(value = "/insertTN", method = RequestMethod.GET)
+    public String insertTN(ModelMap modelMap){
+        modelMap.addAttribute("dto", new SinhVienTN());
+        modelMap.addAttribute("nganhs", nganhRepositories.findAll());
+        modelMap.addAttribute("truongs", truongRepositories.findAll());
+        return "insertTN";
+    }
+
+
+    @RequestMapping(value = "/insertTN", method = RequestMethod.POST)
+    public String insertTN(ModelMap modelMap,
+                           @ModelAttribute("dto") SinhVienTN dto){
+        System.out.println(dto.getSoCMND());
+        SinhVien sinhVien = new SinhVien();
+        sinhVien.setSoCMND(dto.getSoCMND());
+        sinhVien.setHoTen(dto.getHoTen());
+        sinhVien.setEmail(dto.getEmail());
+        sinhVien.setDiaChi(dto.getDiaChi());
+        sinhVien.setSoDT(dto.getSoDT());
+        sinhVienRepositories.save(sinhVien);
+
+        TotNghiep totNghiep = new TotNghiep();
+        totNghiep.setSoCMND(dto.getSoCMND());
+        totNghiep.setMaTruong(dto.getMaTruong());
+        totNghiep.setMaNganh(dto.getMaTruong());
+        totNghiep.setHeTN(dto.getHeTN());
+        totNghiep.setNgayTN(dto.getNgayTN());
+        totNghiep.setLoaiTN(dto.getLoaiTN());
+        totNghiepRepositories.save(totNghiep);
+
+        return "redirect:/sinhvien";
+    }
 
 
     @RequestMapping(value = "/insertSV", method = RequestMethod.GET)

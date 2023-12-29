@@ -37,7 +37,7 @@
             </c:forEach>
           </tbody>
         </table>
-        <a class="btn btn-info" href="/sinhvien/insertSV">Add SV</a>
+        <a class="btn btn-info" href="/sinhvien/insertTN">Add SV</a>
       </div>
 </body>
 </html>
