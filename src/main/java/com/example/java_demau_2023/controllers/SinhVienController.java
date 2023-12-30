@@ -34,13 +34,6 @@ public class SinhVienController {
         return "sinhvien";
     }
 
-    @RequestMapping(value = "/insertTN", method = RequestMethod.GET)
-    public String insertTN(ModelMap modelMap){
-        modelMap.addAttribute("dto", new SinhVienTN());
-        modelMap.addAttribute("nganhs", nganhRepositories.findAll());
-        modelMap.addAttribute("truongs", truongRepositories.findAll());
-        return "insertTN";
-    }
 
     @RequestMapping(value = "/updateTN/{SoCMND}", method = RequestMethod.GET)
     public String updateTN(ModelMap modelMap, @PathVariable Integer SoCMND){
@@ -61,6 +54,15 @@ public class SinhVienController {
         sinhVienRepositories.deleteById(SoCMND);
         return "redirect:/sinhvien";
     }
+
+    @RequestMapping(value = "/insertTN", method = RequestMethod.GET)
+    public String insertTN(ModelMap modelMap){
+        modelMap.addAttribute("dto", new SinhVienTN());
+        modelMap.addAttribute("nganhs", nganhRepositories.findAll());
+        modelMap.addAttribute("truongs", truongRepositories.findAll());
+        return "insertTN";
+    }
+
 
     @RequestMapping(value = "/insertTN", method = RequestMethod.POST)
     public String insertTN(ModelMap modelMap,

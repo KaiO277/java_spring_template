@@ -28,11 +28,11 @@ public class SinhVienTN {
         DiaChi = diaChi;
     }
 
-    public int getSoCMND() {
+    public Integer getSoCMND() {
         return SoCMND;
     }
 
-    public void setSoCMND(int soCMND) {
+    public void setSoCMND(Integer soCMND) {
         SoCMND = soCMND;
     }
 
